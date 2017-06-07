@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jR7-Md-xuo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="OMX-0j-hE3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Restaurants Table View Controller-->
+        <!--Restaurants List-->
         <scene sceneID="qI2-QE-Ku7">
             <objects>
                 <tableViewController id="jR7-Md-xuo" customClass="RestaurantsTableViewController" customModule="Restaurants" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,6 +72,7 @@
                                     <outlet property="nameLabel" destination="EfT-ny-VgN" id="0Am-Mi-Ves"/>
                                     <outlet property="thumbnailImageView" destination="cif-1X-XpW" id="OXU-U4-FjX"/>
                                     <outlet property="typeLabel" destination="fLR-T8-OWh" id="y2U-7g-DVV"/>
+                                    <segue destination="ptu-b9-0EW" kind="show" identifier="ShowDetails" id="huf-Oa-4ye"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -80,8 +81,95 @@
                             <outlet property="delegate" destination="jR7-Md-xuo" id="UhW-k0-NdJ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Restaurants List" id="2ZT-w8-je1"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z4c-d9-gTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896.79999999999995" y="156.97151424287858"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="hMP-39-BAG">
+            <objects>
+                <viewController id="ptu-b9-0EW" customClass="DetailViewController" customModule="Restaurants" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jt6-8R-gXF"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Mb-bg-7m2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Va1-ab-4cT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uWh-jk-9To">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ezb-mD-xNA">
+                                <rect key="frame" x="24" y="72" width="327" height="23"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mII-Az-iyp">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="23"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2M-Wy-Mgz">
+                                        <rect key="frame" x="111" y="0.0" width="105" height="23"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                        <color key="textColor" red="0.29354109432234432" green="0.28514194139194138" blue="0.97780734890109888" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMa-F6-pcY">
+                                        <rect key="frame" x="222" y="0.0" width="105" height="23"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" red="0.52156865600000002" green="0.1098039225" blue="0.050980392839999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="JHU-ZT-egt"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uWh-jk-9To" firstAttribute="top" secondItem="Va1-ab-4cT" secondAttribute="top" id="3Un-rz-Tly"/>
+                            <constraint firstItem="4Mb-bg-7m2" firstAttribute="top" secondItem="uWh-jk-9To" secondAttribute="bottom" id="FCR-D4-fQe"/>
+                            <constraint firstItem="ezb-mD-xNA" firstAttribute="leading" secondItem="Va1-ab-4cT" secondAttribute="leadingMargin" constant="8" id="Fv5-Ix-IHE"/>
+                            <constraint firstAttribute="trailing" secondItem="uWh-jk-9To" secondAttribute="trailing" id="aM3-NX-sEn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ezb-mD-xNA" secondAttribute="trailing" constant="8" id="dI4-kE-ifH"/>
+                            <constraint firstItem="uWh-jk-9To" firstAttribute="leading" secondItem="Va1-ab-4cT" secondAttribute="leading" id="rd0-wO-BqB"/>
+                            <constraint firstItem="ezb-mD-xNA" firstAttribute="top" secondItem="jt6-8R-gXF" secondAttribute="bottom" constant="8" id="xf5-bx-IWE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="locationLabel" destination="d2M-Wy-Mgz" id="NWb-bP-H6l"/>
+                        <outlet property="nameLabel" destination="mII-Az-iyp" id="gVF-tp-M0Q"/>
+                        <outlet property="restaurantImageView" destination="uWh-jk-9To" id="UlS-h0-xV9"/>
+                        <outlet property="typeLabel" destination="cMa-F6-pcY" id="9tE-sK-QTR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5C-4P-i4P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1600.8" y="156.97151424287858"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Crg-cf-4GT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OMX-0j-hE3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Lm-PM-CMz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jR7-Md-xuo" kind="relationship" relationship="rootViewController" id="tQQ-mY-Rl7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gaX-ZI-YMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-42.399999999999999" y="156.97151424287858"/>
         </scene>
