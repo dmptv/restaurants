@@ -9,7 +9,6 @@
 import UIKit
 
 class RestaurantsTableViewController: UITableViewController {
-    
 
     var restaurants: [Restaurant] = [Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "Hong Kong",
                                                 image: "cafedeadend.jpg", isVisited: false),
@@ -33,10 +32,8 @@ class RestaurantsTableViewController: UITableViewController {
                                      Restaurant(name: "Royal Oak", type: "British", location: "London", image: "royaloak.jpg", isVisited: false),
                                      Restaurant(name: "Thai Cafe", type: "Thai", location: "London", image: "thaicafe.jpg", isVisited: false)]
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
   
     }
 
@@ -54,7 +51,7 @@ class RestaurantsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        // из массива имен берем имя картинки
+        // set image
         cell.thumbnailImageView?.image = UIImage(named: restaurants[indexPath.row].image)
         cell.nameLabel?.text = restaurants[indexPath.row].name
         cell.locationLabel?.text = restaurants[indexPath.row].location
@@ -63,87 +60,67 @@ class RestaurantsTableViewController: UITableViewController {
         cell.thumbnailImageView.layer.cornerRadius = 10.0
         cell.thumbnailImageView.clipsToBounds = true
         
-        // првоеряем ставить или нет чекмарк
+        // checkmark
         cell.accessoryType = restaurants[indexPath.row].isVisited ? .checkmark : .none
      
         return cell
     }
     
-    // покажем алерт вью с action
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // алерт Sheet и мессаж
         let optMenu = UIAlertController(title: nil, message: "What you want to do", preferredStyle: .actionSheet)
-        // Action  - cancel
         let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         
-        // title из-ся в зависимости от - ставим или убираем чекмарк
         let isVisitedTitle = restaurants[indexPath.row].isVisited ? "Я тут не был" : "Я тут был"
     
-        // create Action - is Visited
         let isVisitedAction = UIAlertAction(title: isVisitedTitle, style: .default) { (action: UIAlertAction!) -> Void in
             let cell = tableView.cellForRow(at: indexPath)
             
-            // изменяем false : true
             self.restaurants[indexPath.row].isVisited = self.restaurants[indexPath.row].isVisited ? false : true
-            // ставим чекмарк
             cell?.accessoryType = self.restaurants[indexPath.row].isVisited ? .checkmark : .none
         }
         
-        //  клоужер как объект - с  Alert и Action
         let callActionHandler = {(action: UIAlertAction!) -> Void in
             
             let alertMessage = UIAlertController(title: "Service is not available", message: "Ssory you can not call right now, repeate it later", preferredStyle: .alert)
             
-            // Action с кнопкой  - OK
             alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             
             self.present(alertMessage, animated: true, completion: nil)
         }
         
-        // Action с вложенным в клоужер алерт и акшн
         let callAction = UIAlertAction(title: "Call" + "123-000\(indexPath.row)", style: .default, handler: callActionHandler)
         
-        // 3 Actions в Алерте
         optMenu.addAction(cancelAction)
         optMenu.addAction(callAction)
         optMenu.addAction(isVisitedAction)
      
-        // покажем Aлерт
         self.present(optMenu, animated: true, completion: nil)
     }
     
 
-    // сделаем кастомную выезжающую кнопку - Share and Delete
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        // создаем кнопк - Social sharing (copy)
         let shareAction = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
             
-            // текст который будет скопирован при нажати на - Copy
             let defaultText = "Just checking in at" + self.restaurants[indexPath.row].name
             
-            // добавим Action  в  Activity Controller
             let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
             
             self.present(activityController, animated: true, completion: nil)
         }
         
-        // кнопкa Delete row
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
-            // удаляем данные из дата соурсе
             self.restaurants.remove(at: indexPath.row)
            
-            // удаляем ряд из таблицы
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
         shareAction.backgroundColor = UIColor(red: 28/255, green: 165/255, blue: 253/255, alpha: 1)
         deleteAction.backgroundColor = UIColor(red: 202/255, green: 202/255, blue: 203/255, alpha: 1)
         
-        // регулируем порядок кнопок
         return [deleteAction, shareAction]
     }
     

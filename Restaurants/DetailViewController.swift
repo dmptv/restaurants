@@ -27,7 +27,6 @@ class DetailViewController: UIViewController {
         nameLabel.text = name
         locationLabel.text = location
         typeLabel.text = type
-        
     }
 
  
